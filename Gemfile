@@ -1,13 +1,34 @@
 source 'https://rubygems.org'
 
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 
-# Support for mysql
-gem 'mysql2'
+### OpenShift Online changes:
+
+# Support for databases and environment.
+# Use 'sqlite3' for testing and development and mysql and postgresql
+# for production.
+#
+# To speed up the 'git push' process you can exclude gems from bundle install:
+# For example, if you use rails + mysql, you can:
+#
+# $ rhc env set BUNDLE_WITHOUT="development test postgresql"
+#
+group :development, :test do
+  gem 'sqlite3'
+  gem 'minitest'
+  gem 'thor'
+end
+
+# Add support for the MySQL
+group :production, :mysql do
+  gem 'mysql2'
+end
+
+group :production, :postgresql do
+  gem 'pg'
+end
+
+### / OpenShift changes
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
