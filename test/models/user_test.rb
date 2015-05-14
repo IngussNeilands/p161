@@ -16,4 +16,8 @@ class UserTest < ActiveSupport::TestCase
     assert user.invalid?, 'username is not unique'
     assert_includes user.errors.full_messages,'Username has already been taken'
   end
+  test "User has many messages" do
+    user = users(:one)
+    assert_respond_to user, :messages, 'user should have messages'
+  end
 end
