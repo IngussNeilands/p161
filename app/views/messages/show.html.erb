@@ -7,7 +7,7 @@
 
 <p>
   <strong>Owner:</strong>
-  <%= @message.owner %>
+  <%= link_to @message.owner.username, @message.owner %>
 </p>
 
 <%= link_to 'Edit', edit_message_path(@message) %> |
