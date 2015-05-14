@@ -24,10 +24,11 @@ PreCommit:
       - '**/Rakefile'
       - '**/config.ru'
     Exclude:
-      - 'db/schema.rb'
+      - 'db/**/*'
       - 'config/**/*'
       - 'script/**/*'
       - 'bin/**/*'
+      - 'test/test_helper.rb'
 
   RailsSchemaUpToDate:
     enabled: true
