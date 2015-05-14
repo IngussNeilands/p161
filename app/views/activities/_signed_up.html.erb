@@ -1,0 +1,13 @@
+<div itemscope
+	 itemtype="http://www.w3.org/ns/activitystreams#Join">
+  <span itemprop="actor" itemscope
+		itemtype="http://www.w3.org/ns/activitystreams#Person">
+    <span itemprop="displayName"><%= activity.user.username %></span>
+  </span>
+  joined/<%= activity.verb %>
+  <span itemprop="object" itemscope
+		itemtype="http://www.w3.org/ns/activitystreams#Group">
+    <span itemprop="displayName">Platform161 Twitter</span>
+  </span>
+  at <%= activity.created_at %>.
+</div>

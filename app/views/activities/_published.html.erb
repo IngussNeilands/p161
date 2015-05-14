@@ -1,0 +1,15 @@
+<div itemscope
+	 itemtype="http://www.w3.org/ns/activitystreams#Create">
+  <span itemprop="actor" itemscope
+		itemtype="http://www.w3.org/ns/activitystreams#Person">
+    <span itemprop="displayName"><%= activity.user.username %></span>
+  </span>
+  created/<%= activity.verb %>
+  <span itemprop="object" itemscope
+		itemtype="http://www.w3.org/ns/activitystreams#Note">
+    a  message
+    with content
+    "<span itemprop="content"><%= activity.subject.body %></span>"
+  </span>
+  at <%= activity.created_at %>.
+</div>

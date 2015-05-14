@@ -9,3 +9,8 @@ two:
   email: example@example.com
   username: example
   password: example
+
+bela:
+  email: bela@bela.bela
+  username: bela
+  password: bela

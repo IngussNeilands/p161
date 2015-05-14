@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Activities</h1>
+<hr>
+<ul>
+  <% @activities.each do |activity| %>
+	  <li>
+		<%= render "#{activity.verb}", :activity => activity %>
+	  </li>
+  <% end %>
+</ul>
+<br>
+
+<%= link_to 'New Activity', new_activity_path %>

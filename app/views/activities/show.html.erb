@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Actor:</strong>
+  <%= @activity.user %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @activity.verb %>
+</p>
+
+<p>
+  <strong>Object:</strong>
+  <%= @activity.subject %>
+</p>
+
+<p>
+  <strong>Object type:</strong>
+  <%= @activity.subject_type %>
+</p>
+
+<%= link_to 'Edit', edit_activity_path(@activity) %> |
+<%= link_to 'Back', activities_path %>

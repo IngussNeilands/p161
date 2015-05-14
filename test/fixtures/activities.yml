@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+follow:
+  user: one
+  verb: followed
+  subject_type: User
+  subject: two
+
+publish:
+  user: one
+  verb: published
+  subject_type: Message
+  subject: one

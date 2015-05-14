@@ -18,16 +18,17 @@
 PreCommit:
   RuboCop:
     enabled: true
-    flags: ['--format=simple', '--except Metrics/LineLength', '--force-exclusion', '--display-cop-names', '-R']
-    Include:
-      - '**/Rakefile'
-      - '**/config.ru'
-    Exclude:
-      - 'db/**/*'
-      - 'config/**/*'
-      - 'script/**/*'
-      - 'bin/**/*'
-      - 'test/test_helper.rb'
+##    flags: ['--format=simple', '--except Metrics/LineLength', '--force-exclusion', '--display-cop-names', '-R', '--debug', '--config .rubocop.yml']
+#    flags: ['--debug', '--config .rubocop.yml']
+#    Include:
+#      - '**/Rakefile'
+#      - '**/config.ru'
+#    Exclude:
+#      - 'db/**/*'
+#      - 'config/**/*'
+#      - 'script/**/*'
+#      - 'bin/**/*'
+#      - 'test/test_helper.rb'
 
   RailsSchemaUpToDate:
     enabled: true

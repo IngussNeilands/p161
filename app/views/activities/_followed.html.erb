@@ -1,0 +1,13 @@
+<div itemscope
+	 itemtype="http://www.w3.org/ns/activitystreams#Follow">
+  <span itemprop="actor" itemscope
+		itemtype="http://www.w3.org/ns/activitystreams#Person">
+    <span itemprop="displayName"><%= activity.user.username %></span>
+  </span>
+  <%= activity.verb %>
+  <span itemprop="object" itemscope
+		itemtype="http://www.w3.org/ns/activitystreams#Person">
+    <span itemprop="displayName"><%= activity.subject.username %></span>
+  </span>
+  at <%= activity.created_at %>.
+</div>

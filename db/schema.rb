@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150514085341) do
+ActiveRecord::Schema.define(version: 20150514162020) do
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "user_id",      null: false
+    t.string   "verb",         null: false
+    t.integer  "subject_id",   null: false
+    t.string   "subject_type", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
 
   create_table "messages", force: :cascade do |t|
     t.text     "body"
@@ -21,6 +30,17 @@ ActiveRecord::Schema.define(version: 20150514085341) do
   end
 
   add_index "messages", ["owner_id"], name: "index_messages_on_owner_id"
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
+  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email"

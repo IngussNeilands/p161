@@ -1,6 +1,5 @@
 AllCops:
   Include:
-    - 'app'
     - '**/Rakefile'
     - '**/config.ru'
   Exclude:
@@ -9,6 +8,7 @@ AllCops:
     - 'script/**/*'
     - 'bin/**/*'
     - 'test/test_helper.rb'
+    - 'Gemfile'
 
 Metrics/LineLength:
   Enabled: false
