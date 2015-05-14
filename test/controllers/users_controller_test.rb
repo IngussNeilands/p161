@@ -18,10 +18,18 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference('User.count') do
-      post :create, user: { email: @user.email, password: @user.password, username: @user.username }
+      post :create, user: { email: @user.email, password: @user.password, username: @user.username+'1' }
     end
 
     assert_redirected_to user_path(assigns(:user))
+  end
+
+  test "should not create user" do
+    assert_no_difference('User.count') do
+      post :create, user: { email: @user.email, password: @user.password, username: @user.username }
+    end
+
+    assert_response :success
   end
 
   test "should show user" do
@@ -34,7 +42,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should update user" do
+  test "should update user only if username is unique" do
     patch :update, id: @user, user: { email: @user.email, password: @user.password, username: @user.username }
     assert_redirected_to user_path(assigns(:user))
   end
