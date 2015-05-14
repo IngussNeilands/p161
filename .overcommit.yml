@@ -16,9 +16,8 @@
 # Uncomment the following lines to make the configuration take effect.
 
 PreCommit:
-  Rubocop:
+  RuboCop:
     enabled: true
-#    on_warn: fail # Treat all warnings as failures
     flags: ['--format=simple', '--except Metrics/LineLength', '--force-exclusion', '--display-cop-names', '-R']
     Include:
       - '**/Rakefile'
