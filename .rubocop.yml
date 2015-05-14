@@ -4,10 +4,11 @@ AllCops:
     - '**/Rakefile'
     - '**/config.ru'
   Exclude:
-    - 'db/schema.rb'
+    - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'
     - 'bin/**/*'
+    - 'test/test_helper.rb'
 
 Metrics/LineLength:
   Enabled: false
