@@ -1,7 +1,7 @@
 # users_controller.rb
 class UsersController < SecuredController
+  before_action :authenticate_user, except: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
   # GET /users
   # GET /users.json
   def index

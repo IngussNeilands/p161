@@ -3,7 +3,7 @@ class SessionsController < SecuredController
   before_action :authenticate_user, only: [:destroy]
 
   def new
-    redirect_to root_path if session[:user_id]
+    redirect_to root_path if @current_user
   end
 
   def create

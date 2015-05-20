@@ -2,18 +2,18 @@
 <html>
 <head>
   <title>Platform161Twitter</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<% if @current_user %>
-	<%= @current_user.username %> | <%= link_to 'Logout', session_path(@current_user.id), :method => :delete %>
-<% else %>
-	<%= link_to 'Please log in', new_session_path %>
-<% end %>
-<%= yield %>
-
+<div class="main">
+  <% if @current_user %>
+	  <%= @current_user.username %> | <%= link_to 'Logout', session_path(@current_user.id), :method => :delete %>
+  <% else %>
+	  <%= link_to 'Please log in', new_session_path %> | <%= link_to 'Register', new_user_path %>
+  <% end %>
+  <%= yield %>
+</div>
 </body>
 </html>
