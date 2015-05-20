@@ -2,13 +2,14 @@
 
 <h3>Welcome username</h3>
 
-<input type="text">
+<%= render :partial => 'message' %>
 
 <h3>Recently happened</h3>
 
 <ul id="activities">
-  <li>XY posted a message</li>
-  <li>Z posted a message</li>
+  <% @recently_happened.each do | message | %>
+  	<li><%= message.body %> by <%= link_to message.owner.username, message.owner %></li>
+  <% end %>
 </ul>
 
 <h3>You are connected to:</h3>

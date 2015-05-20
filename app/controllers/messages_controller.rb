@@ -1,5 +1,5 @@
 # messages_controller.rb
-class MessagesController < ApplicationController
+class MessagesController < SecuredController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
   # GET /messages
@@ -26,7 +26,6 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(message_params)
-
     respond_to do |format|
       if @message.save
         format.html { redirect_to @message, notice: 'Message was successfully created.' }
@@ -35,6 +34,7 @@ class MessagesController < ApplicationController
         format.html { render :new }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
+      format.js
     end
   end
 

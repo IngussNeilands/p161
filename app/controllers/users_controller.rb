@@ -1,5 +1,5 @@
 # users_controller.rb
-class UsersController < ApplicationController
+class UsersController < SecuredController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
