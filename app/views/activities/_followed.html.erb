@@ -2,12 +2,12 @@
 	 itemtype="http://www.w3.org/ns/activitystreams#Follow">
   <span itemprop="actor" itemscope
 		itemtype="http://www.w3.org/ns/activitystreams#Person">
-    <span itemprop="displayName"><%= activity.user.username %></span>
+    <span itemprop="displayName"><%= link_to activity.user.username, activity.user %></span>
   </span>
-  <%= activity.verb %>
+  <%= activity.verb %>/started following
   <span itemprop="object" itemscope
 		itemtype="http://www.w3.org/ns/activitystreams#Person">
-    <span itemprop="displayName"><%= activity.subject.username %></span>
+    <span itemprop="displayName"><%= link_to activity.subject.username, activity.subject %></span>
   </span>
   at <%= activity.created_at %>.
 </div>

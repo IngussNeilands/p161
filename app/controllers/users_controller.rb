@@ -1,7 +1,8 @@
 # users_controller.rb
-class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+class UsersController < SecuredController
+  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user_for_edit, only: [:edit]
+  before_action :authenticate, except: [:new, :create]
   # GET /users
   # GET /users.json
   def index
@@ -29,7 +30,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        session[:user_id] = @user.id
+        format.html { redirect_to dashboard_index_path, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -66,7 +68,11 @@ class UsersController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user
-    @user = User.includes(:messages).find(params[:id])
+    @user = User.includes(:messages, :following).find(params[:id])
+  end
+
+  def set_user_for_edit
+    @user = User.includes(:messages, :following).find(session[:user_id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

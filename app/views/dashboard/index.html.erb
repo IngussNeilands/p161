@@ -1,0 +1,38 @@
+<h2>Dashboard</h2>
+
+<h3>Welcome <%= @user.username %></h3>
+
+<%= render 'message_form' %>
+
+<h3>Activities</h3>
+
+<ul id="activities">
+  <% @user.activities.each do |activity| %>
+	  <li><%= render "activities/#{activity.verb}", activity: activity %></li>
+  <% end %>
+</ul>
+
+<h3>Following</h3>
+
+<ul id="following">
+  <% @user.following.each do |user| %>
+	  <li><%= link_to user.username, user %></li>
+  <% end %>
+</ul>
+
+<h3>Followers</h3>
+
+<ul id="followers">
+  <% @user.followers.each do |user| %>
+	  <li><%= link_to user.username, user %></li>
+  <% end %>
+</ul>
+
+<h3>Activities2</h3>
+
+<ul>
+  <% Activity.all.each do |activity| %>
+	  <li><%= render "activities/#{activity.verb}", activity: activity %></li>
+  <% end %>
+</ul>
+

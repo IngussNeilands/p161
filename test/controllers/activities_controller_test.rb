@@ -4,6 +4,7 @@ require 'test_helper'
 class ActivitiesControllerTest < ActionController::TestCase
   setup do
     @activity = activities(:follow)
+    session[:user_id] = users(:one).id
   end
 
   test 'should get index' do

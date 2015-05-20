@@ -1,5 +1,5 @@
 # activities_controller.rb
-class ActivitiesController < ApplicationController
+class ActivitiesController < SecuredController
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
 
   # GET /activities

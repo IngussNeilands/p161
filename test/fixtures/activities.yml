@@ -11,3 +11,9 @@ publish:
   verb: published
   subject_type: Message
   subject: one
+
+publish:
+  user: one
+  verb: signed_up
+  subject_type: Message
+  subject: one

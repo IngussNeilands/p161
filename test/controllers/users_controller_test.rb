@@ -3,6 +3,7 @@ require 'test_helper'
 # users_controller_test.rb
 class UsersControllerTest < ActionController::TestCase
   setup do
+    session[:user_id] = users(:one).id
     @user = users(:one)
   end
 
@@ -22,7 +23,7 @@ class UsersControllerTest < ActionController::TestCase
       post :create, user: { email: @user.email, password: @user.password, username: @user.username + '1' }
     end
 
-    assert_redirected_to user_path(assigns(:user))
+    assert_redirected_to dashboard_index_path
   end
 
   test 'should not create user' do

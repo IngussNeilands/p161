@@ -2,7 +2,7 @@
 	 itemtype="http://www.w3.org/ns/activitystreams#Join">
   <span itemprop="actor" itemscope
 		itemtype="http://www.w3.org/ns/activitystreams#Person">
-    <span itemprop="displayName"><%= activity.user.username %></span>
+    <span itemprop="displayName"><%= link_to activity.user.username, activity.user %></span>
   </span>
   joined/<%= activity.verb %>
   <span itemprop="object" itemscope

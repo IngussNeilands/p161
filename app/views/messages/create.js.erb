@@ -1,0 +1,13 @@
+<% if @message.errors.any? %>
+	$('#success_explanation').remove();
+	$('#error_explanation').remove();
+	$('.new_message .field').removeClass('field_with_errors');
+	$('.new_message .field').addClass('field_with_errors');
+	$('form').prepend('<div id="error_explanation"><h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2><ul><% @message.errors.full_messages.each do |message| %><li><%= message %></li><% end %></ul></div>');
+<% else %>
+	$('#error_explanation').remove();
+	$('.new_message .field').removeClass('field_with_errors');
+	$('form').prepend('<div id="success_explanation"><h2>Published</h2></div>');
+	document.getElementById('message').value = "";
+	$('#activities').prepend('<li><%= link_to 'You', @message.owner %> published a message with content <%= @message.body %> just now.</li>')
+<% end %>
