@@ -1,5 +1,5 @@
 # messages_controller.rb
-class MessagesController < ApplicationController
+class MessagesController < SecuredController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
   # GET /messages

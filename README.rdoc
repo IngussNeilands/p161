@@ -43,3 +43,22 @@ Database is simple sqlite3.
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
+
+=== Sessions and User login
+
+Sessions are handled with session variable 'session[:user_id]'
+User login is via username and password.
+
+Every controller that needs an authenticated user can be inherited from SecuredController:
+
+'class SecuredController < ApplicationController
+	before_action :authenticate_user
+
+	private
+
+	def authenticate_user
+		...
+	end
+end'
+
+WARNING: Since SessionsController is set to assign resources, logout needs an id. That id is set to be the userid. !!!! This can leak private information.!!!!

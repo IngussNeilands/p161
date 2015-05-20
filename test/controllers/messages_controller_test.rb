@@ -4,6 +4,7 @@ require 'test_helper'
 class MessagesControllerTest < ActionController::TestCase
   setup do
     @message = messages(:one)
+    session[:user_id] = users(:one)
   end
 
   test 'should get index' do
