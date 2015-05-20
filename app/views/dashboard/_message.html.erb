@@ -1,0 +1,22 @@
+<%= form_for(@current_user.messages.build, remote: true) do |f| %>
+<%= f.hidden_field :owner_id %>
+<% if f.object.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(f.object.errors.count, "error") %> prohibited this message from being saved:</h2>
+
+	  <ul>
+		<% f.object.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+		<% end %>
+	  </ul>
+	</div>
+<% end %>
+
+<div class="field">
+  What's on your mind?<br>
+  <%= f.text_field(:body, {:size => 140, :maxsize=>160, :id=>'message'}) %>
+</div>
+<div class="actions">
+  <%= f.submit 'Publish' %>
+</div>
+<% end %>

@@ -6,7 +6,8 @@ Platform161 has decided to change its business model and is going to create some
 From the app we want to provide these features:
 * A user can register using his email, a selected password and a user name. The user name has to be unique.
 * One user can publish messages no longer than 160 characters.
-* One user can follow what other users publish. When the user accesses the application, he will see the messages published by the users he follow.
+* One user can follow what other users publish.
+* When the user accesses the application, he will see the messages published by the users he follow.
 * Everyone can see the users followed by any user.
 * Everyone can see the users that follow one user.
 
@@ -46,7 +47,7 @@ Database is simple sqlite3.
 
 === Sessions and User login
 
-Sessions are handled with session variable 'session[:user_id]'
+Sessions are handled with session variable session[:user_id]
 User login is via username and password.
 
 Every controller that needs an authenticated user can be inherited from SecuredController:
