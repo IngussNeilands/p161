@@ -1,3 +1,5 @@
+# secured_controller.rb
+# this controller can be inherited by any controller that needs an authenticated user
 class SecuredController < ApplicationController
   before_action :authenticate_user
 

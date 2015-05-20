@@ -1,3 +1,4 @@
+# sessions_controller.rb
 class SessionsController < SecuredController
   before_action :authenticate_user, only: [:destroy]
 
@@ -8,7 +9,7 @@ class SessionsController < SecuredController
   def create
     @user = User.find_by_username_and_password(params[:login][:username], params[:login][:password])
     respond_to do |format|
-      if @user.present? && set_current_user
+      if set_current_user
         format.html { redirect_to root_path, notice: 'Successful login.' }
       else
         format.html { render :new, notice: 'Something went wrong...' }
@@ -24,8 +25,7 @@ class SessionsController < SecuredController
   private
 
   def set_current_user
-    session[:user_id] = @user.id
-    true
+    session[:user_id] = @user.id if @user.present?
   end
 
   def clear_current_user
