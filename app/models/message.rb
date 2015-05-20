@@ -7,6 +7,6 @@ class Message < ActiveRecord::Base
   before_validation :sanitize_input
 
   def sanitize_input
-    body.gsub!(/\s/, '')
+    body.gsub!('\r\n', '') if body.present?
   end
 end

@@ -23,9 +23,9 @@ class MessageTest < ActiveSupport::TestCase
   end
 
   test 'Messages is no longer than 160 characters' do
-    body = 'This text is supposed to be much much longer than 160 characters, so I keep typeing until I get so bored that I finally stop typing, but that hasn\'t been done yet.'
+    body = "This text is supposed to be much much longer than 160 characters, so I keep typeing until I get so bored that I finally stop typing, but that hasn\'t been done yet.\r\n\r\n\r\n"
     message = Message.new(owner: User.first, body: body)
-    assert message.invalid?, 'message should be not longer than 160 characters'
+    assert message.invalid?, 'message should be not longer than 160 characters (' + message.body.length.to_s + ':' + message.body
   end
 
   test 'A user can publish messages no longer than 160 characters' do
