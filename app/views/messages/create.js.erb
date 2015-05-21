@@ -9,5 +9,5 @@
 	$('.new_message .field').removeClass('field_with_errors');
 //	$('form').prepend('<div id="success_explanation"><h2>Published</h2></div>');
 	document.getElementById('message').value = "";
-	$('#activities').prepend('<li><%= link_to 'You', @message.owner %> published a message with content <%= @message.body %> just now.</li>')
+	$('#activities').prepend('<li><%= escape_javascript render :partial => 'dashboard/post', locals: {message: @message} %></li>')
 <% end %>

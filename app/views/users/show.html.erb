@@ -9,6 +9,13 @@
   <strong>Username:</strong>
   <%= @user.username %>
 </p>
+<%= follow_or_unfollow_user(@user) %>
+<h3>Posts</h3>
+<ul>
+  <% @user.messages.each do |message| %>
+  	<li><%= message.body %> (<%= message.created_at %>)</li>
+  <% end %>
+</ul>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

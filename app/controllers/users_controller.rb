@@ -1,7 +1,8 @@
 # users_controller.rb
 class UsersController < SecuredController
   before_action :authenticate_user, except: [:new, :create]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :follow, :unfollow]
+  before_action :set_current_user, only: [:edit, :update, :destroy]
   # GET /users
   # GET /users.json
   def index
@@ -62,11 +63,34 @@ class UsersController < SecuredController
     end
   end
 
+  def follow
+    respond_to do |format|
+      if @current_user.relationships.create(followed_id: params[:id])
+        format.js
+      else
+        format.js
+      end
+    end
+  end
+
+  def unfollow
+    @relationship = @current_user.relationships.find_by_followed_id(params[:id])
+    puts @relationship.inspect
+    @relationship.destroy
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_user
     @user = User.includes(:messages).find(params[:id])
+  end
+
+  def set_current_user
+    @user = @current_user
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

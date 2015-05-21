@@ -8,21 +8,23 @@
 
 <ul id="activities">
   <% @recently_happened.each do | message | %>
-  	<li><%= message.body %> by <%= link_to message.owner.username, message.owner %></li>
+  	<li>
+	  <%= render :partial => 'post', locals: {message: message} %>
+	</li>
   <% end %>
 </ul>
 
-<h3>You are connected to:</h3>
+<h3>You are watching:</h3>
 
 <ul id="following">
-  <li>username1</li>
-  <li>username2</li>
-  <li>username3</li>
+  <% @current_user.followings.each do |user| %>
+	  <%= render :partial => 'user', locals: {user: user} %>
+  <% end %>
 </ul>
 
 <h3>You are followed by:</h3>
 <ul>
-  <li>username4</li>
-  <li>username3</li>
-  <li>username2</li>
+  <% @current_user.followers.each do |user| %>
+	  <li><%= link_to user.username, user %> | <%= follow_or_unfollow_user(user) %></li>
+  <% end %>
 </ul>
