@@ -1,0 +1,30 @@
+<h2>Dashboard</h2>
+
+<h3>Welcome username</h3>
+
+<%= render :partial => 'message' %>
+
+<h3>Recently happened</h3>
+
+<ul id="activities">
+  <% @recently_happened.each do | message | %>
+  	<li>
+	  <%= render :partial => 'post', locals: {message: message} %>
+	</li>
+  <% end %>
+</ul>
+
+<h3>You are watching:</h3>
+
+<ul id="following">
+  <% @current_user.followings.each do |user| %>
+	  <%= render :partial => 'user', locals: {user: user} %>
+  <% end %>
+</ul>
+
+<h3>You are followed by:</h3>
+<ul>
+  <% @current_user.followers.each do |user| %>
+	  <li><%= link_to user.username, user %> | <%= follow_or_unfollow_user(user) %></li>
+  <% end %>
+</ul>
