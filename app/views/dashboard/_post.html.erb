@@ -1,0 +1,11 @@
+<div class="message">
+  <div class="message_body">
+	<%= message.body %>
+  </div>
+  <div class="message_by">
+	by <%= link_to display_username(message.owner), message.owner %>
+  </div>
+  <div class="message_at">
+	<%= distance_of_time_in_words(Time.now, message.created_at) %> ago
+  </div>
+</div>

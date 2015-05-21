@@ -9,7 +9,7 @@
 <body>
 <div class="main">
   <% if @current_user %>
-	  <%= @current_user.username %> | <%= link_to 'Logout', session_path(@current_user.id), :method => :delete %>
+	  Welcome <%= link_to @current_user.username , edit_user_path(@current_user) %> | <%= link_to 'Dashboard', root_path %> | <%= link_to 'Users', users_path %> | <%= link_to 'Logout', session_path(@current_user.id), :method => :delete %>
   <% else %>
 	  <%= link_to 'Please log in', new_session_path %> | <%= link_to 'Register', new_user_path %>
   <% end %>

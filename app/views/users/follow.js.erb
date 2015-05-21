@@ -1,0 +1,2 @@
+$('.<%= @current_user.id.to_s + '_' + params[:id]%>').replaceWith('<%= unfollow_user(@user) %>');
+$('#following').append('<%= escape_javascript render( partial: 'dashboard/user', locals: {user: @user}) %>');

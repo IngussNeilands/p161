@@ -37,6 +37,19 @@ div {
 .main {
   margin-left: 10vw;
 }
+
+.message {
+  padding: 5px;
+}
+.message_by {
+  display: inline-block;
+}
+
+.message_at {
+  padding-left: 55px;
+  display: inline-block;
+}
+
 #message {
   width: 80vw;
 }
