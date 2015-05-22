@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
-  resources :messages
+  resources :messages, only: [:index, :show, :create]
+
+  get 'dashboard' => 'dashboard#index'
 
   resources :users do
     member do

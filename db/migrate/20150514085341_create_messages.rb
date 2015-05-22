@@ -6,6 +6,6 @@ class CreateMessages < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_foreign_key :messages, :owners
+    #add_foreign_key :messages, :owners
   end
 end

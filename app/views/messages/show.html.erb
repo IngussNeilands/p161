@@ -1,14 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Body:</strong>
-  <%= @message.body %>
+Message by <%= link_to @message.owner.username, @message.owner, {"onclick" => "ga('send', 'event', 'button', 'user_show');return true;"} %>:
 </p>
 
-<p>
-  <strong>Owner:</strong>
-  <%= link_to @message.owner.username, @message.owner %>
-</p>
+<%= @message.body %>
 
-<%= link_to 'Edit', edit_message_path(@message) %> |
-<%= link_to 'Back', messages_path %>
