@@ -17,6 +17,6 @@
   <%= f.text_field(:body, {:size => 140, :maxsize=>160, :id=>'message'}) %>
 </div>
 <div class="actions">
-  <%= f.submit 'Publish' %>
+  <%= f.submit 'Publish', "onclick" => "ga('send', 'event', 'button', 'msg_publish');return true;" %>
 </div>
 <% end %>

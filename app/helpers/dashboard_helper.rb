@@ -13,10 +13,10 @@ module DashboardHelper
   end
 
   def follow_user(user)
-    link_to 'Follow', follow_user_path(user), method: :post, remote: true, class: @current_user.id.to_s + '_' + user.id.to_s
+    link_to 'Follow', follow_user_path(user), method: :post, remote: true, class: @current_user.id.to_s + '_' + user.id.to_s, "onclick": "ga('send', 'event', 'button', 'user_follow');return true;"
   end
 
   def unfollow_user(user)
-    link_to 'Unfollow', unfollow_user_path(user), method: :post, remote: true, class: @current_user.id.to_s + '_' + user.id.to_s
+    link_to 'Unfollow', unfollow_user_path(user), method: :post, remote: true, class: @current_user.id.to_s + '_' + user.id.to_s, "onclick": "ga('send', 'event', 'button', 'user_unfollow');return true;"
   end
 end
