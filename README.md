@@ -1,149 +1,141 @@
-# Rails 4 Sample App on OpenShift #
-Quickstart rails 4 application for openshift.
+# README #
 
-The easiest way to install this application is to use the [OpenShift
-Instant Application][template]. If you'd like to install it
-manually, follow [these directions](#manual-installation).
+Platform161 Twitter Solution.
 
-## OpenShift Considerations ##
-These are some special considerations you may need to keep in mind when
-running your application on OpenShift.
+Platform161 has decided to change its business model and is going to create something new, a social network.
+From the app we want to provide these features:
 
-### Database ###
-Your application is configured to use your OpenShift database in
-Production mode.
-Because it addresses these databases based on [OpenShift Environment
-Variables](http://red.ht/NvNoXC), you will need to change these if you
-want to use your application in Production mode outside of
-OpenShift.
+* A user can register using his email, a selected password and a user name. The user name has to be unique.
 
-By default the development and test environment is configured to use
-the sqlite3 database adapter.
+* One user can publish messages no longer than 160 characters.
 
-You can also speed up the `git push` process by excluding gems you don't need,
-based on the database you use in OpenShift. You can use the `BUNDLE_WITHOUT`
-environment variable for that:
+* One user can follow what other users publish.
 
-```
-$ rhc env set BUNDLE_WITHOUT="development test postgresql"
-```
+* When the user accesses the application, he will see the messages published by the users he follow.
 
-Use the command above if you don't want to install any development gems and you
-are using OpenShift MySQL cartridge.
+* Everyone can see the users followed by any user.
 
-### Assets ###
-Your application is set to precompile the assets every time you push
-to OpenShift. Any assets you commit to your repo will be preserved
-alongside those which are generated during the build.
+* Everyone can see the users that follow one user.
 
-By adding `disable_asset_compilation` marker, you will disable asset compilation upon application deployment.
+But other developers should be able to build their own applications using these public information. So, provide an API access to allow:
 
-### Security ###
-Since these quickstarts are shared code, we had to take special
-consideration to ensure that security related configuration variables
-was unique across applications.
-To accomplish this, we modified some of the configuration files (shown
-in the table below).
-Now instead of using the same default values, your application will
-generate it's own value using the `initialize_secret` function from `lib/openshift_secret_generator.rb`.
+* See one user messages.
 
-This function uses a secure environment variable that only exists on
-your deployed application and not in your code anywhere.
-You can then use the function to generate any variables you need.
-Each of them will be unique so `initialize_secret(:a)` will differ
-from `initialize_secret(:b)` but they will also be consistent, so any
-time your application uses them (even across reboots), you know they
-will be the same.
+* See the users followed by one user.
 
-TLDR: You should copy/link the `.openshift/lib/openshift_secret_generator.rb`
-file into `./lib` folder and link the `secret_token.rb` and `session_store.rb`
-files into `./config/initializers` folder. Look at this quickstart for an
-example.
+* See the users that follow one user.
 
-### Development mode ###
-When you develop your Rails application in OpenShift, you can also enable the
-'development' environment by setting the `RAILS_ENV` environment variable,
-using the `rhc` client, like:
+## General ##
+
+* Ruby version: 2.2.0
+
+* Rails version: 4.2.0
+
+### System dependencies ###
+
+
+### Configuration ###
+
+### Database creation ###
+
+Database is simple sqlite3.
+
+'rake db:create'
+
+### Database initialization ###
+
+'rake db:migrate'
+
+### How to run the test suite ###
+
+'rake'
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+### Sessions and User login ###
+
+Sessions are handled with session variable session[:user_id]
+User login is via username and password.
+
+Every controller that needs an authenticated user can be inherited from SecuredController:
 
 ```
-$ rhc env set RAILS_ENV=development
+class SecuredController < ApplicationController
+	before_action :authenticate_user
+
+	private
+
+	def authenticate_user
+		...
+	end
+end
 ```
 
-If you do so, OpenShift will run your application under 'development' mode.
-In development mode, your application will:
+WARNING: Since SessionsController is set to assign resources, logout needs an id. That id is set to be the userid. !!!!
 
-* Show more detailed errors in browser
-* Skip static assets (re)compilation
-* Skip web server restart, as the code is reloaded automatically
-* Skip `bundle` command if the Gemfile is not modified
+## API ##
 
-Development environment can help you debug problems in your application
-in the same way as you do when developing on your local machine.
-However, we strong advise you to not run your application in this mode
-in production.
+Always returns json.
 
-##### Modified Files #####
+/api/v1/users/id/messages[.json]
 
-<table>
-  <tr>
-    <th>File</th>
-    <th>Variable</th>
-  </tr>
-  <tr>
-    <td>config/initializers/secret_token.rb</td> 
-    <td>Railsapp::Application.config.secret_token</td>
-  </tr>
-  <tr>
-    <td>config/initializers/session_store.rb</td>
-    <td>Railsapp::Application.config.session_store</td>
-  </tr>
-</table>
+'id'  is a valid user id
+returns: user messages
 
-## Manual Installation ##
+example: http://localhost:3000/api/v1/users/980190964/messages[.json]
+returns:
+`
+[
+	{
+		"owner_id":980190964,
+		"id":980190967,
+		"body":"Cool",
+		"created_at":"2015-05-21T00:18:58.090Z"
+	},
+	{
+		"owner_id":980190964,
+		"id":980190968,
+		"body":"Nice",
+		"created_at":"2015-05-21T00:21:04.766Z"
+	}
+]
+`
 
-1. Create an account at https://www.openshift.com
+/api/v1/users/id/followers[.json]
+'id'  is a valid user id
+returns: user follwers
 
-1. Create a rails application
+example: http://localhost:3000/api/v1/users/980190964/followers[.json]
+returns:
+```
+[
+	{
+		"id":980190962,
+		"username":"test",
+		"email":"test@test.com"
+	}
+]
+```
+/api/v1/users/id/following[.json]
+'id'  is a valid user id
+returns: followed users
 
-    ```
-    rhc app create railsapp ruby-2.0
-    ```
-
-   **Note:** This quickstart will not work with Ruby 1.8
-
-
-1. Add database support to your application
-
-    ```
-    rhc cartridge add -a railsapp -c mysql-5.5
-    ```
-
-    or
-
-    ```
-    rhc cartridge add -a railsapp -c postgresql-9.2
-    ```
-
-1. Add this upstream Rails quickstart repository
-
-    ```
-    cd railsapp
-    git remote add upstream -m master git://github.com/openshift/rails4-example.git
-    git pull -s recursive -X theirs upstream master
-    ```
-
-1. Push your new code
-
-    ```
-    git push
-    ```
-
-1. That's it! Enjoy your new Rails application!
-
-
-[template]: https://openshift.redhat.com/app/console/application_types
-
-License
--------
-
-This code is dedicated to the public domain to the maximum extent permitted by applicable law, pursuant to CC0 (http://creativecommons.org/publicdomain/zero/1.0/)
+example: http://localhost:3000/api/v1/users/980190964/following[.json]
+returns:
+```
+[
+	{
+		"id":298486374,
+		"username":"example",
+		"email":"example@example.com"
+	},
+	{
+		"id":980190962,
+		"username":
+		"test",
+		"email":"test@test.com"
+	}
+]
+```
