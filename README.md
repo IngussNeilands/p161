@@ -86,7 +86,8 @@ returns: user messages
 
 example: http://localhost:3000/api/v1/users/980190964/messages[.json]
 returns:
-`
+
+```
 [
 	{
 		"owner_id":980190964,
@@ -101,7 +102,7 @@ returns:
 		"created_at":"2015-05-21T00:21:04.766Z"
 	}
 ]
-`
+```
 
 /api/v1/users/id/followers[.json]
 'id'  is a valid user id
@@ -109,6 +110,7 @@ returns: user follwers
 
 example: http://localhost:3000/api/v1/users/980190964/followers[.json]
 returns:
+
 ```
 [
 	{
@@ -124,6 +126,7 @@ returns: followed users
 
 example: http://localhost:3000/api/v1/users/980190964/following[.json]
 returns:
+
 ```
 [
 	{
