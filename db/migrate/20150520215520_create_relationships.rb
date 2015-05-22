@@ -6,7 +6,7 @@ class CreateRelationships < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_foreign_key :relationships, :followers
-    add_foreign_key :relationships, :followeds
+    #add_foreign_key :relationships, :followers
+    #add_foreign_key :relationships, :followeds
   end
 end

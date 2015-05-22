@@ -20,7 +20,7 @@ group :development, :test do
 end
 
 # Add support for the MySQL
-group :production, :mysql do
+group :development, :production, :mysql do
   gem 'mysql2'
 end
 

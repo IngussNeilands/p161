@@ -28,6 +28,9 @@ defaults: &defaults
 
 development:
   <<: *defaults
+  database: p161
+  username: root
+#  socket: :'/tmp/mysql.sock'
 
 test: &test
   <<: *defaults
